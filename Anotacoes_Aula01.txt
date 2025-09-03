@@ -1,0 +1,38 @@
+Aula 01;
+
+Arquivo .cy.js:
+
+
+--Comandos--
+
+describe() -> Bloco utilizado para agrupar testes relacionados, criado o que é chamado de "suíte de testes";
+Pode ser entendido como um container ou uma categoria para um conjunto de testes que verificam uma funcionalidade específica ou uma parte do seu sistema.
+
+Tudo o que estiver dentro das chaves { ... } deste describe faz parte da mesma suíte de testes. Você pode ter vários testes (it) dentro de um único describe.
+
+Possui dois parâmetros, sendo uma String que definirá o nome para a suíte de testes e uma função, onde tudo o que estiver dentro das chaves {...} do describe faz parte da mesma suíte de testes. Pode ter vários testes (it) dentro de um único describe;
+
+
+it() -> Bloco it define um "caso de teste" individual, sendo aqui onde a ação de testar algo específico acontece;
+
+Cada bloco it deve testar uma única coisa;
+
+Possui dois parâmetros, sendo uma String descrevendo o caso de teste específico e uma função, onde todas as ações definidas dentro das chaves {...} do it serão executadas como um teste individual. Caso todos os comandos dentro dele forem executados com sucesso, o teste passa. Caso algum falhe, o teste falha;
+
+cy.visit() -> Instrui o navegador controlado pelo Cypress a acessar uma URL específica;
+
+Recebe como parâmetro a URL do site que deve ser visitado;
+
+.should() -> Serve para fazer realizar verificações de resultados esperados, sendo que essas verificações são, automaticamente, tentadas várias vezes por um tempo default (4s). Caso dê timeout, o teste falha;
+
+cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT'); -> Neste exemplo, é feita a verificação se o elemento dentro da tag <title/> no index.html é igual a 'Central de Atendimento ao Cliente TAT';
+
+
+Arquivo package.json:
+
+"scripts:"{
+   "cy:open": "cypress open",
+   "test": cypress run
+},
+
+Com esses códigos, ao rodar o programa via linha de comando pelo terminal, para abir o Cypress será apenas necessário escrever: 'npm cy:open' e, para rodar um teste, será necessário 'npm test';
