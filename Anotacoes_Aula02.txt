@@ -1,0 +1,69 @@
+Aula 02;
+
+
+--Comandos--
+
+.type() -> Função utilizada para digitiar algo em algum campo definido;
+
+.click() -> Funcionalidade que permite clicar em algum botão, para disparar alguma ação;
+
+
+Tanto o .type() quanto o .click() são utilizados com o encadeamento de comandos, como nos exemplos:
+
+- cy.get('input').type("Hello World!");
+- cy.get('.btn').click();
+
+
+- cy.get() -> Comando que permite identificar os elementos com os quais se deseja interagir ou fazer verificações;
+
+Normalmente, o cy.get() é utilizado passando como argumento um seletor CSS, identificando um (ou mais) elemento(s), para posterior ação ou verificação;
+
+Por exemplo, cy.get('[data-test="avatar"]').
+
+O Cypress possui mecanismos de re-tentativas de execução de comandos. Ou seja, caso o Cypress não consiga identificar um elemento por seu seletor CSS (ao usar o comando cy.get(), por exemplo), ele tentará novamente (por um determinado período de tempo), antes de falhar o teste.
+
+- beforeEach() -> Comando utilizado para evitar repetição de ações; No caso, ele indica que, antes de cada teste, o que estiver no seu escopo é executado;
+
+É um dos comandos dos 'Hooks' (before(), beforeEach(), afterEach(), after())
+
+
+
+Encadeamento de comandos:
+
+- No Cypress, ao contrário de outras ferramentas de automação de teste, a maioria de seus comandos podem ser encadeados;
+
+Ex: cy.get('input[type="text"]').type("Olá mundo!");
+
+- O comando cy.get() passa adiante ao próximo comando o elemento encontrado. Além disso, outros comandos, tais como .type() e .click() e outros, também passam adiante o mesmo elemento, possibilitando encadearmos novos comandos, por exemplo, para fazer uma verificação:
+
+cy.get('input[type="text"]')
+  .type("Olá mundo!")
+  .should("have.value", "Olá mundo!")
+
+Por exemplo, antes de digitar no campo, podemos verificar se tal elemento está visível.
+
+cy.get('input[type="text"]')
+  .should('be.visible')
+  .type('Olá mundo!')
+  .should('have.value', 'Olá mundo!')
+
+ Uma alternativa melhor para a cadeia de comandos acima seria a seguinte.
+
+cy.get('input[type="text"]')
+  .as('textField')
+  .should('be.visible')
+  .type('Olá mundo!')
+cy.get('@textField')
+  .should('have.value', 'Olá mundo!')
+
+ Com os comandos acima, logo após obter o input do tipo text, eu crio uma referência à ele, dando-lhe um alias e deixo o comando .type() no final. Depois, obtenho o mesmo elemento pelo seu alias (cy.get('@textField')) e então executo a verificação final.
+
+Essa segunda alternativa é melhor pois ações devem estar no final de cadeias, e não no meio;
+
+
+
+OBSERVAÇÃO:
+
+No Cypress, há uma funcionalidade chamada de 'Select Playground'. Ao selecionar essa funcionalidade, com o cursor do mouse pode ser verificado o seletor de cada campo e, assim, o comando com o cy.get() já é montado, porém, é importanto ressaltar que alguns seletores que são indicados nessa funcionalidade podem ser difíceis de ler, assim, necessitam de um outro seletor CSS;
+
+Há também a funcionalidade de 'Time Travel', onde, ao clicar em uma opção na aba da esquerda, pode-se verificar como era o estado da aplicação antes do ponto selecionado;

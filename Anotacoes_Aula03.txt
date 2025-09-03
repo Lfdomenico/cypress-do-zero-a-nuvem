@@ -1,0 +1,15 @@
+Aula 02;
+
+
+--Comandos--
+
+Cypress -> Módulo 'Cypress', onde, dentro dele, pode-se chamar algumas funcionalidades que estão empacotadas dentro dele, como o _;
+
+_ -> 'Low Dash' é uma biblioteca, muito utilizada no JavaScript, que contém funcões utilitárias, como: .repeat();
+
+.repeat -> Repete uma String por uma certa quantidade de vezes; O seu primeiro argumento é a String, enquanto o segundo é o número de vezes que essa String deve ser repetida; 
+
+Ex: const texto = Cypress._.repeat("Olá", 7); //'Olá' será repetido 7 vezes;
+
+- O comando .type() pode ter o seu delay padrão (10 milissegundos) sobrescrito, como, por exemplo:
+cy.get('#teste').type("Teste", { delay:0 })
